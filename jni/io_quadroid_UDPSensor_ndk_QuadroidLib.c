@@ -95,7 +95,8 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved){
         return JNI_ERR;
     }
 
-    mClass = (*mEnv)->FindClass(mEnv, "io/quadroid/UDPSensor/main/MainActivity");
+    jclass temp = mEnv->FindClass("io/quadroid/UDPSensor/main/MainActivity");
+    mClass = (jclass)mEnv->NewGlobalRef(temp);
     if(mClass == NULL){
     	if(NDK2SDK_DEBUG==1){
     		LOGI("JNIOnLoad: Could not get java class");
